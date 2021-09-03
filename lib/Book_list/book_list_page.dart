@@ -1,3 +1,4 @@
+import 'package:book_list_sample/add_book/add_book_page.dart';
 import 'package:book_list_sample/book_list/book_list_model.dart';
 import 'package:book_list_sample/domain/book.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,14 @@ class BookListPage extends StatelessWidget {
           return FloatingActionButton(
             onPressed: () async {
               // 画面遷移
-
+              final bool? added = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddBookPage(),
+                  fullscreenDialog: true,
+                ),
+              );
+              model.fetchBookList();
             },
             tooltip: 'Increment',
             child: Icon(Icons.add),
