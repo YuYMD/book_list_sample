@@ -10,6 +10,7 @@ class BookListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<BookListModel>(
+//毎回最初にcreate: (_) => BookListModel()..fetchBookList()を読み込ませている。
       create: (_) => BookListModel()..fetchBookList(),
       child: Scaffold(
         appBar: AppBar(
@@ -39,6 +40,8 @@ class BookListPage extends StatelessWidget {
         floatingActionButton:
         Consumer<BookListModel>(builder: (context, model, child) {
           return FloatingActionButton(
+            //画面遷移の方法：builder: (context) => AddBookPage(),に移動する。
+            // fullscreenDialog: true,で下からニュルっと出てくる。
             onPressed: () async {
               // 画面遷移
               final bool? added = await Navigator.push(

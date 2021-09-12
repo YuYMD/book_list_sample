@@ -11,12 +11,17 @@ class AddBookPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('本を追加'),
         ),
+
+        //長いけど構成としてはTextFieldが２つとElevatedButtonが１つあるだけである。
         body: Center(
           child: Consumer<AddBookModel>(builder: (context, model, child) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+
+                  //hintTextでヒントテキストを記入する。
+                  //onChangedで値を取得する。
                   TextField(
                     decoration: InputDecoration(
                       hintText: '本のタイトル',
@@ -41,7 +46,7 @@ class AddBookPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      // 追加の処理
+                      // try catch文である。成功すれば緑でエラーが出たら赤
                       try {
                         await model.addBook();
                         Navigator.of(context).pop(true);
@@ -51,6 +56,8 @@ class AddBookPage extends StatelessWidget {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
+                        //snackbar（下に出てくるflashみたいなメッセージ）を作る
+                        //ScaffoldMessengerでsnakbarを表示させる
                       } catch (e) {
                         final snackBar = SnackBar(
                           backgroundColor: Colors.red,
